@@ -1,4 +1,5 @@
 <?php
+
 $array = explode(',', $_GET['array']);
 
 // 修正はここから
@@ -18,3 +19,6 @@ for ($i = 0; $i < $cnt - 1; $i++) {
 echo "<pre>";
 print_r($array);
 echo "</pre>";
+
+//バブルソートについて参考にした動画
+//https://youtu.be/IHFBb0wYBR0
