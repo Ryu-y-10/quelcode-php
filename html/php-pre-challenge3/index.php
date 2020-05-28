@@ -12,3 +12,8 @@ try {
     http_response_code(500);
 }
 
+intval($limit); //文字列をint型に変換
+
+if ($limit < 1) {
+    http_response_code(400);
+}
