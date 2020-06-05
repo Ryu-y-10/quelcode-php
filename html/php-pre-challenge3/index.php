@@ -1,5 +1,14 @@
 <?php
 
+//バリデーション filter_inputで　01 文字列、浮動小数点数、１未満はエラー　
+//ctype_digitで　整数+半角スペース(１　)、＋をつけた整数(＋1)の時エラーが出るようにしてます
+if (filter_input(INPUT_GET, 'target', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) && ctype_digit($_GET['target'])) {
+    $limit = (int) $_GET['target'];
+} else {
+    http_response_code(400);
+    exit();
+}
+
 $dsn = 'mysql:dbname=test;host=mysql';
 $dbuser = 'test';
 $dbpassword = 'test';
@@ -20,14 +29,7 @@ $numbers = array_column($numbers, 'value'); //特定のカラムを取り出す
 
 $numbers = array_map('intval', $numbers); //配列の型を整数に変換
 
-//バリデーション filter_inputで　01 文字列、浮動小数点数、１未満はエラー　
-//ctype_digitで　整数+半角スペース(１　)、＋をつけた整数(＋1)の時エラーが出るようにしてます
-if (filter_input(INPUT_GET, 'target', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) && ctype_digit($_GET['target'])) {
-    $limit = (int) $_GET['target'];
-} else {
-    http_response_code(400);
-    exit();
-}
+
 
 $cnt = count($numbers); //for文の繰り返し条件の上限値を取得
 
