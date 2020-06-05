@@ -15,13 +15,14 @@ $dbpassword = 'test';
 
 try {
     $db = new PDO($dsn, $dbuser, $dbpassword); //データベース接続
+    $dbnumbers = $db->query('SELECT value FROM prechallenge3 ORDER BY value ASC'); //データベースへSQL発行
 } catch (PDOException $e) {
     echo 'DB接続エラー：' . $e->getMessage();
     http_response_code(500);
     exit();
 }
 
-$dbnumbers = $db->query('SELECT value FROM prechallenge3 ORDER BY value ASC'); //データベースへクエリ発行
+
 
 $numbers = $dbnumbers->fetchAll(); //取得しデータを全てフェッチする
 
