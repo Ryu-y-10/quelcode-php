@@ -9,6 +9,7 @@ try {
 } catch (PDOException $e) {
     echo 'DB接続エラー：' . $e->getMessage();
     http_response_code(500);
+    exit();
 }
 
 $dbnumbers = $db->query('SELECT value FROM prechallenge3 ORDER BY value ASC'); //データベースへクエリ発行
@@ -25,8 +26,8 @@ if (filter_input(INPUT_GET, 'target', FILTER_VALIDATE_INT, ["options" => ["min_r
     $limit = (int) $_GET['target'];
 } else {
     http_response_code(400);
+    exit();
 }
-
 
 $cnt = count($numbers); //for文の繰り返し条件の上限値を取得
 
